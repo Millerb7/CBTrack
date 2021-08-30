@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import Home from './pages/Home';
 import Log from './pages/Log';
@@ -17,6 +17,12 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
+        <nav className="nav flex-row justify-space-around p-4 m-2 bg-dark">
+            <Link to="nav-item">Home</Link>
+            <Link to="nav-item">Log</Link>
+            <Link to="nav-item">Calendar</Link>
+            <Link to="nav-item">Settings</Link>
+        </nav>
         <div className="flex-column justify-center align-center min-100-vh bg-primary">
           <Switch>
             <Route exact path="/">
