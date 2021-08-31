@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
+import { CREATE_THOUGHTS } from '../../utils/mutations';
 
 const Input = () => {
-    const { loading, data } = useQuery(/*QUERY THOUGHTS*/);
-  
-    const thoughtList = data?.thought || [];
-  
     const [formData, setFormData] = useState({
       originalThought: 'bad',
       fixedThought: 'good',
     });
     let history = useHistory();
   
-    const [createMatchup, { error }] = useMutation(/*CREATE THOUGHTS*/);
+    const [createMatchup, { error }] = useMutation(CREATE_THOUGHTS);
   
     const handleInputChange = (event) => {
       const { name, value } = event.target;
