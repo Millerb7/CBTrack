@@ -1,10 +1,10 @@
 // map entries
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { useMutation, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
+import { QUERY_THOUGHTS } from '../../utils/queries';
 
 const Log = () => {
-    const { loading, data } = useQuery(/*QUERY THOUGHT*/);
+    const { loading, data } = useQuery(QUERY_THOUGHTS);
   
     const thoughtList = data?.thought || [];
   
@@ -12,33 +12,13 @@ const Log = () => {
       originalThought: 'bad',
       fixedThought: 'good',
     });
-    let history = useHistory();
-  
-    const [createMatchup, { error }] = useMutation(/*CREATE THOUGHT*/);
   
     const handleInputChange = (event) => {
       const { name, value } = event.target;
       setFormData({ ...formData, [name]: value });
     };
   
-    const handleFormSubmit = async (event) => {
-      event.preventDefault();
-  
-      try {
-        const { data } = await createMatchup({
-          variables: { ...formData },
-        });
-  
-        history.push(`/matchup/${data.createMatchup._id}`);
-      } catch (err) {
-        console.error(err);
-      }
-  
-      setFormData({
-        originalThought: 'bad',
-        fixedThought: 'good',
-      });
-    };
+    // handle page change to single entry...
   
     return (
       <div className="card bg-white card-rounded w-25">
@@ -49,23 +29,22 @@ const Log = () => {
           {loading ? (
             <div>Loading...</div>
           ) : (
-            <form onSubmit={handleFormSubmit}>
               <select name="log" onChange={handleInputChange}>
                 {thoughtList.map((thought) => {
                   return (
-                    <option key={thought._id} value={thought.name}>
-                      {thought.name}
+                    <option key={thought._id}>
+                        <textarea value={thought.originalThought}>
+                        {thought.originalThought}
+                        </textarea>
+                        <textarea value={thought.fixedThought}>
+                        {thought.fixedThought}
+                        </textarea>
                     </option>
                   );
                 })}
               </select>
-              <button className="btn btn-danger" type="submit">
-                Post Thought
-              </button>
-            </form>
           )}
         </div>
-        {error && <div>error...</div>}
       </div>
     );
   };

@@ -42,30 +42,24 @@ const Input = () => {
     return (
       <div className="card bg-white card-rounded w-25">
         <div className="card-header bg-dark text-center">
-          <h1>Let's create a matchup!</h1>
+          <h1>Fix a bad thought:</h1>
         </div>
         <div className="card-body m-5">
-          {loading ? (
-            <div>Loading...</div>
-          ) : (
             <form onSubmit={handleFormSubmit}>
-              <label>Tech 1: </label>
-              <select name="tech1" onChange={handleInputChange}>
-                {thoughtList.map((thought) => {
-                  return (
-                    <option key={thought._id} value={thought.name}>
-                      {thought.name}
-                    </option>
-                  );
-                })}
-              </select>
-              <button className="btn btn-danger" type="submit">
+              <label>Original: </label>
+              <textarea name="original" onChange={handleInputChange}>
+                
+              </textarea>
+              <label>Fixed: </label>
+              <textarea name="fixed" onChange={handleInputChange}>
+
+              </textarea>
+              <button onClick={handleFormSubmit} className="btn btn-danger" type="submit">
                 Post Thought
               </button>
             </form>
-          )}
         </div>
-        {error && <div>error...</div>}
+        {error && <div>Something broke</div>}
       </div>
     );
   };
