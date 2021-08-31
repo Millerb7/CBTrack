@@ -1,12 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
-import Home from './pages/Home';
-import Log from './pages/Log';
-import Entry from './components/Entry';
-import Calendar from './pages/Calendar';
+
 import Settings from './pages/Settings';
 import NotFound from './pages/NotFound';
+import ContentContainer from './components/ContentContainer';
 
 const client = new ApolloClient({
   uri: '/graphql',
@@ -18,25 +16,10 @@ function App() {
     <div>
       <ApolloProvider client={client}>
         <Router className="bg-warning">
-          <nav className="nav flex-row justify-space-around p-4 m-2 bg-dark">
-            <Link to="nav-item">Home</Link>
-            <Link to="nav-item">Log</Link>
-            <Link to="nav-item">Calendar</Link>
-            <Link to="nav-item">Settings</Link>
-          </nav>
           <div className="flex-column justify-center align-center min-100-vh bg-primary">
             <Switch>
               <Route exact path="/">
-                <Home />
-              </Route>
-              <Route exact path="/log">
-                <Log />
-              </Route>
-              <Route exact path="/log/:id">
-                <Entry />
-              </Route>
-              <Route exact path="/calendar">
-                <Calendar />
+                <ContentContainer />
               </Route>
               <Route exact path="/settings">
                 <Settings />
