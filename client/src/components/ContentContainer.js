@@ -5,7 +5,7 @@ import Calendar from './Calendar/Calendar';
 import Navbar from './Navbars/HomeNavbar';
 import Input from './Entry/Input';
 
-export default function PortfolioContainer() {
+export default function ContentContainer() {
   const [currentPage, setCurrentPage] = useState('Home');
 
   const renderPage = () => {
@@ -29,4 +29,6 @@ export default function PortfolioContainer() {
       <Input />
     </div>
   );
-}
+};
+
+
