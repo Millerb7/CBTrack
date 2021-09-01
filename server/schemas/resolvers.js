@@ -6,26 +6,26 @@ const resolvers = {
     users: async () => {
       return User.find().populate("entries");
     },
-    user: async (parent, { username }) => {
-      return User.findOne({ username }).populate("entries");
+    user: async (parent, { email }) => {
+      return User.findOne({ email }).populate("entries");
     },
-    entries: async (parent, { username }) => {
-      const params = username ? { username } : {};
-      return Thought.find(params).sort({ createdAt: -1 });
+    entries: async (parent, { email }) => {
+      const params = email ? { email } : {};
+      return Entry.find(params).sort({ createdAt: -1 });
     },
-    entry: async (parent, { thoughtId }) => {
-      return Thought.findOne({ _id: thoughtId });
+    entry: async (parent, { entryId }) => {
+      return Entry.findOne({ _id: entryId });
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate("thoughts");
+        return User.findOne({ _id: context.user._id }).populate("entries");
       }
       throw new AuthenticationError("You need to be logged in!");
     },
   },
   Mutation: {
-    addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
+    addUser: async (parent, { name, email, password }) => {
+      const user = await User.create({ name, email, password });
       const token = signToken(user);
       return { token, user };
     },
@@ -46,19 +46,20 @@ const resolvers = {
 
       return { token, user };
     },
-    addThought: async (parent, { thoughtText }, context) => {
+    addEntry: async (parent, { originalThought, fixedThought }, context) => {
       if (context.user) {
-        const thought = await Thought.create({
-          thoughtText,
-          thoughtAuthor: context.user.username,
+        const entry = await Entry.create({
+          originalThought,
+          fixedThought,
+          entryAuthor: context.user.email,
         });
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { thoughts: thought._id } }
+          { $addToSet: { entries: entry._id } }
         );
 
-        return thought;
+        return entry;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
