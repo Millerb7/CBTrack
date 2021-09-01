@@ -1,24 +1,68 @@
-const { User, Entry } = require('../models');
+const { User, Entry } = require("../models");
+const { signToken } = require("../utils/auth");
 
 const resolvers = {
-    Query: {
-        user: async () => {
-            return User.find({});
-        },
-        entries: async (parent, { _id }) => {
-            return Entry.find(_id ? { _id } : {});
-        }
+  Query: {
+    users: async () => {
+      return User.find().populate("entries");
     },
-    Mutation: {
-        createUser: async (parent,args) => {
-            const user = await User.create(args);
-            return user;
-        },
-        createEntry: async (parent,args) => {
-            const entry = await Entry.create(args);
-            return entry;
-        },
-    }
+    user: async (parent, { username }) => {
+      return User.findOne({ username }).populate("entries");
+    },
+    entries: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return Thought.find(params).sort({ createdAt: -1 });
+    },
+    entry: async (parent, { thoughtId }) => {
+      return Thought.findOne({ _id: thoughtId });
+    },
+    me: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOne({ _id: context.user._id }).populate("thoughts");
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+  },
+  Mutation: {
+    addUser: async (parent, { username, email, password }) => {
+      const user = await User.create({ username, email, password });
+      const token = signToken(user);
+      return { token, user };
+    },
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
+
+      if (!user) {
+        throw new AuthenticationError("No user found with this email address");
+      }
+
+      const correctPw = await user.isCorrectPassword(password);
+
+      if (!correctPw) {
+        throw new AuthenticationError("Incorrect credentials");
+      }
+
+      const token = signToken(user);
+
+      return { token, user };
+    },
+    addThought: async (parent, { thoughtText }, context) => {
+      if (context.user) {
+        const thought = await Thought.create({
+          thoughtText,
+          thoughtAuthor: context.user.username,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { thoughts: thought._id } }
+        );
+
+        return thought;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+  },
 };
 
 module.exports = resolvers;

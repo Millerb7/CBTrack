@@ -9,9 +9,15 @@ const entrySchema = new Schema ({
         type: String,
         required: true,
     },
-    date: {
+    thoughtAuthor: {
+        type: String,
+        required: true,
+        trim: true,
+      },
+    createdAt: {
         type: Date,
-        default: Date.now
+        default: Date.now,
+        get: (timestamp) => dateFormat(timestamp),
     }
 });
 

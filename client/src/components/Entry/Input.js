@@ -37,7 +37,7 @@ const Input = () => {
     };
   
     return (
-      <div className="card bg-white card-rounded w-25">
+      <div className="card d-flex flex-cloumn bg-white card-rounded w-25">
         <div className="card-header bg-dark text-center">
           <h1>Fix a bad thought:</h1>
         </div>

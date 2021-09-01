@@ -8,6 +8,11 @@ const typeDefs = gql`
     password: String!
   }
 
+  type Auth {
+    token: ID!
+    profile: Profile
+  }
+
   type Entry {
     _id: ID!
     originalThought: String!
