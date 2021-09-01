@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import { CREATE_THOUGHTS } from '../../utils/mutations';
+import { CREATE_ENTRIES } from '../../utils/mutations';
 
 const Input = () => {
     const [formData, setFormData] = useState({
@@ -10,7 +10,7 @@ const Input = () => {
     });
     let history = useHistory();
   
-    const [createMatchup, { error }] = useMutation(CREATE_THOUGHTS);
+    const [createMatchup, { error }] = useMutation(CREATE_ENTRIES);
   
     const handleInputChange = (event) => {
       const { name, value } = event.target;

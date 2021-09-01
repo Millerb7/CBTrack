@@ -1,7 +1,9 @@
 // map entries
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
-import { QUERY_THOUGHTS } from '../../utils/queries';
+import { QUERY_THOUGHTS } from '../utils/queries';
+import HomeNavbar from '../components/Navbars/HomeNavbar';
+import Input from '../components/Entry/Input';
 
 const Log = () => {
     const { loading, data } = useQuery(QUERY_THOUGHTS);
@@ -21,6 +23,8 @@ const Log = () => {
     // handle page change to single entry...
   
     return (
+      <div>
+        <HomeNavbar />
       <div className="card bg-white card-rounded w-25">
         <div className="card-header bg-dark text-center">
           <h1>Previous Logs!</h1>
@@ -45,6 +49,8 @@ const Log = () => {
               </select>
           )}
         </div>
+      </div>
+      <Input />
       </div>
     );
   };

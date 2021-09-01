@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import Articles from './Articles/Articles';
-import Logs from './Entry/Log';
+import Logs from '../pages/Log';
 import Calendar from './Calendar/Calendar';
 import Navbar from './Navbars/HomeNavbar';
 import Input from './Entry/Input';
 import BackNavbar from './Navbars/BackNavbar';
 import Settings from '../pages/Settings';
-import Login from '../components/Login';
+import Login from '../pages/Login';
+import Signup from '../pages/Signup';
 
 export default function ContentContainer() {
   const [currentPage, setCurrentPage] = useState('Home');
@@ -16,6 +17,7 @@ export default function ContentContainer() {
       return (
         <div>
           <Navbar currentPage={currentPage} handlePageChange={handlePageChange} />
+          dddd
           <Articles />
         </div>
       );
@@ -24,6 +26,7 @@ export default function ContentContainer() {
       return (
         <div>
           <Navbar currentPage={currentPage} handlePageChange={handlePageChange} />
+          dddd
           <Logs />
         </div>
       );
@@ -32,6 +35,7 @@ export default function ContentContainer() {
       return (
         <div>
           <Navbar currentPage={currentPage} handlePageChange={handlePageChange} />
+          dddd
           <Calendar />
         </div>
       );
@@ -40,6 +44,7 @@ export default function ContentContainer() {
       return (
         <div>
           <BackNavbar currentPage={currentPage} handlePageChange={handlePageChange} />
+          dddd
           <Settings />
         </div>
       );
@@ -48,7 +53,17 @@ export default function ContentContainer() {
       return (
         <div>
           <BackNavbar currentPage={currentPage} handlePageChange={handlePageChange} />
+          dddd
           <Login />
+        </div>
+      );
+    } 
+    if (currentPage === 'Signup') {
+      return (
+        <div>
+          <BackNavbar currentPage={currentPage} handlePageChange={handlePageChange} />
+          dddd
+          <Signup />
         </div>
       );
     } 

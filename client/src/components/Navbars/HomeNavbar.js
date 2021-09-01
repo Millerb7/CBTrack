@@ -1,32 +1,28 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 
-function HomeNavbar ({currentPage, handlePageChange}) {
-    return (
-        <nav className="nav flex-row justify-space-around p-4 m-2 bg-dark">
-          <ul>
-              <li>
-                  <a href="#home" onClick={() => handlePageChange('Home')} className={currentPage === 'Home' ? 'nav-link active' : 'nav-link'}>
-                    Home
-                  </a>
-              </li>
-              <li>
-                  <a href="#log" onClick={() => handlePageChange('Log')} className={currentPage === 'Log' ? 'nav-link active' : 'nav-link'}>
-                    Log
-                  </a>
-              </li>
-              <li>
-                  <a href="#calendar" onClick={() => handlePageChange('Calendar')} className={currentPage === 'Calendar' ? 'nav-link active' : 'nav-link'}>
-                    Calendar
-                  </a>
-              </li>
-              <li>
-                  <a href="#settings" onClick={() => handlePageChange('Settings')} className={currentPage === 'Settings' ? 'nav-link active' : 'nav-link'}>
-                    Settings
-                  </a>
-              </li>
-          </ul>
-        </nav>
-    );
-};
+function HomeNavbar() {
+  return (
+    <nav className="nav flex-row justify-space-around p-4 m-2 bg-dark">
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/log">Log</Link>
+        </li>
+        <li>
+          <Link to="/calendar">Calendar</Link>
+        </li>
+        <li>
+          <Link to="/settings">Settings</Link>
+        </li>
+        <li>
+          <Link to="/Login">Login</Link>
+        </li>
+      </ul>
+    </nav>
+  );
+}
 
 export default HomeNavbar;

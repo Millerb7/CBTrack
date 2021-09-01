@@ -6,7 +6,7 @@ export const ADD_USER = gql`
       token
       user {
         _id
-        name
+        email
       }
     }
   }
@@ -18,18 +18,21 @@ export const LOGIN_USER = gql`
       token
       user {
         _id
-        email
+        name
       }
     }
   }
 `;
 
-export const CREATE_THOUGHTS = gql`
+export const CREATE_ENTRIES = gql`
   mutation createVote($_id: String!, $originalThought: String!, $fixedThought: String!) {
     createVote(_id: $_id, originalThought: $originalThought, fixedThought: $fixedThought) {
       _id
       originalThought
       fixedThought
+      thoughtAuthor
+      createdAt
     }
   }
 `;
+

@@ -4,8 +4,9 @@ import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 
 import Auth from '../utils/auth';
+import BackNavbar from '../components/Navbars/BackNavbar';
 
-const Login = (props) => {
+const Login = ( {currentPage, handlePageChange} ) => {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
 
@@ -42,6 +43,7 @@ const Login = (props) => {
 
   return (
     <main className="flex-row justify-center mb-4">
+      <BackNavbar />
       <div className="col-12 col-lg-10">
         <div className="card">
           <h4 className="card-header bg-dark text-light p-2">Login</h4>
@@ -52,6 +54,7 @@ const Login = (props) => {
                 <Link to="/">back to the homepage.</Link>
               </p>
             ) : (
+              <div>
               <form onSubmit={handleFormSubmit}>
                 <input
                   className="form-input"
@@ -77,6 +80,12 @@ const Login = (props) => {
                   Submit
                 </button>
               </form>
+              <Link to="/Signup">
+                <button onCLick={handlePageChange} className={currentPage === 'Signup' ? 'nav-link active' : 'nav-link'}>
+                Need to sign up?
+            </button>
+            </Link>
+            </div>
             )}
 
             {error && (

@@ -9,7 +9,7 @@ const typeDefs = gql`
     entries: [Entry]!
   }
 
-  type Thought {
+  type Entry {
     _id: ID
     originalThought: String
     fixedThought: String

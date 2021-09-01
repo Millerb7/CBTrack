@@ -3,19 +3,20 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
-
+import Home from './pages/Home';
+import Calendar from './pages/Calendar';
 import Settings from './pages/Settings';
 import NotFound from './pages/NotFound';
-import ContentContainer from './components/ContentContainer';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import Log from './pages/Log';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {
-  // get the authentication token from local storage if it exists
   const token = localStorage.getItem('id_token');
-  // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
@@ -37,10 +38,22 @@ function App() {
           <div className="flex-column justify-center align-center min-100-vh bg-primary">
             <Switch>
               <Route exact path="/">
-                <ContentContainer />
+                <Home />
+              </Route>
+              <Route exact path="/log">
+                <Log />
+              </Route>
+              <Route exact path="/calendar">
+                <Calendar />
               </Route>
               <Route exact path="/settings">
                 <Settings />
+              </Route>
+              <Route exact path="/login">
+                <Login />
+              </Route>
+              <Route exact path="/signup">
+                <Signup />
               </Route>
               <Route>
                 <NotFound />
