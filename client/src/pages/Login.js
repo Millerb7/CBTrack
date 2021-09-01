@@ -6,7 +6,7 @@ import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 import BackNavbar from '../components/Navbars/BackNavbar';
 
-const Login = ( {currentPage, handlePageChange} ) => {
+const Login = () => {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
 
@@ -81,9 +81,7 @@ const Login = ( {currentPage, handlePageChange} ) => {
                 </button>
               </form>
               <Link to="/Signup">
-                <button onCLick={handlePageChange} className={currentPage === 'Signup' ? 'nav-link active' : 'nav-link'}>
                 Need to sign up?
-            </button>
             </Link>
             </div>
             )}
