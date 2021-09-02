@@ -2,6 +2,7 @@ import React from 'react';
 import Input from '../components/Entry/Input';
 import HomeNavbar from '../components/Navbars/HomeNavbar';
 import Graphic from '../components/Calendar/Graphic';
+import Day from '../components/Calendar/Day';
 
 function Calendar () {
     return (
@@ -12,6 +13,9 @@ function Calendar () {
           <h2>This is your daily progress!</h2>
           <div>
             <Graphic />
+          </div>
+          <div>
+            <Day />
           </div>
         </div>
         <div className="card-footer text-center m-3">
