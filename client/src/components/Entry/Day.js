@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
-import { QUERY_ENTRIES } from '../../utils/queries';
+import { QUERY_DATE } from '../../utils/queries';
 import dateFormat from '../../utils/dateFormat';
 
 const Day = ({ currentDate }) => {
-    const { loading, data } = useQuery(QUERY_ENTRIES);
+    const { loading, data } = useQuery(QUERY_DATE);
   
     const entryList = data?.entries || [];
   

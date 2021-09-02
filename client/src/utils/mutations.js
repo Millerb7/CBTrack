@@ -30,7 +30,7 @@ export const ADD_ENTRY = gql`
       _id
       originalThought
       fixedThought
-      thoughtAuthor
+      entryAuthor
       createdAt
     }
   }

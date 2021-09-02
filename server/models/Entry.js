@@ -15,7 +15,7 @@ const entrySchema = new Schema ({
         maxlength: 280,
         trim: true,
     },
-    thoughtAuthor: {
+    entryAuthor: {
         type: String,
         required: true,
         trim: true,

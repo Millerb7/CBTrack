@@ -34,6 +34,8 @@ const Input = () => {
     },
   });
 
+  console.log(Auth.getProfile());
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -59,7 +61,8 @@ const Input = () => {
     if (name === "originalThought" && value.length <= 280) {
       setOriginalText(value);
       setOriginalCount(value.length);
-    } else if (name === "fixedThought" && value.length <= 280) {
+    } 
+    if (name === "fixedThought" && value.length <= 280) {
       setFixedText(value);
       setFixedCount(value.length);
     }

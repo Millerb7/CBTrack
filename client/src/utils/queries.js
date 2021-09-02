@@ -6,7 +6,7 @@ export const QUERY_USER = gql`
       _id
       name
       email
-      thoughts {
+      entries {
         _id
         originalThought
         fixedThoguht
@@ -22,7 +22,7 @@ export const QUERY_ENTRIES = gql`
       _id
       originalThought
       fixedThought
-      thoughtAuthor
+      entryAuthor
       createdAt
     }
   }
@@ -34,7 +34,7 @@ query user($email: String!, $date: String!) {
     _id
     name
     email
-    thoughts (where: {createdAt: {_eq: date}}) {
+    entries (where: {createdAt: {_eq: date}}) {
       _id 
       originalThought
       fixedThoguht
@@ -50,7 +50,7 @@ export const QUERY_ENTRY = gql`
       _id
       originalThought
       fixedThought
-      thoughtAuthor
+      entryAuthor
       createdAt
     }
   }
@@ -66,7 +66,7 @@ export const QUERY_ME = gql`
         _id
         originalThought
         fixedThought
-        thoughtAuthor
+        entryAuthor
         createdAt
       }
     }
