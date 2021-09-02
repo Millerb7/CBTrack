@@ -1,64 +1,127 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
-import { CREATE_ENTRIES } from '../../utils/mutations';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import { ADD_ENTRY } from "../../utils/mutations";
+import { QUERY_ENTRIES, QUERY_ME } from "../../utils/queries";
+
+import Auth from "../../utils/auth";
 
 const Input = () => {
-    const [formData, setFormData] = useState({
-      originalThought: 'bad',
-      fixedThought: 'good',
-    });
-    let history = useHistory();
-  
-    const [createMatchup, { error }] = useMutation(CREATE_ENTRIES);
-  
-    const handleInputChange = (event) => {
-      const { name, value } = event.target;
-      setFormData({ ...formData, [name]: value });
-    };
-  
-    const handleFormSubmit = async (event) => {
-      event.preventDefault();
-  
+  const [originalThought, setOriginalText] = useState("");
+  const [fixedThought, setFixedText] = useState("");
+
+  const [originalCount, setOriginalCount] = useState(0);
+  const [fixedCount, setFixedCount] = useState(0);
+
+  const [addEntry, { error }] = useMutation(ADD_ENTRY, {
+    update(cache, { data: { addEntry } }) {
       try {
-        const { data } = await createMatchup({
-          variables: { ...formData },
+        const { entries } = cache.readQuery({ query: QUERY_ENTRIES });
+
+        cache.writeQuery({
+          query: QUERY_ENTRIES,
+          data: { entries: [addEntry, ...entries] },
         });
-  
-        history.push(`/matchup/${data.createMatchup._id}`);
-      } catch (err) {
-        console.error(err);
+      } catch (e) {
+        console.error(e);
       }
-  
-      setFormData({
-        originalThought: 'bad',
-        fixedThought: 'good',
+
+      const { me } = cache.readQuery({ query: QUERY_ME });
+      cache.writeQuery({
+        query: QUERY_ME,
+        data: { me: { ...me, entries: [addEntry, ...me.entries] } },
       });
-    };
-  
-    return (
-      <div className="card d-flex flex-cloumn bg-white card-rounded w-25">
-        <div className="card-header bg-dark text-center">
-          <h1>Fix a bad thought:</h1>
-        </div>
-        <div className="card-body m-5">
+    },
+  });
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const { data } = await addEntry({
+        variables: {
+          originalThought,
+          fixedThought,
+          thoughtAuthor: Auth.getProfile().data.email,
+        },
+      });
+
+      setOriginalText("");
+      setFixedText("");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    if (name === "originalThought" && value.length <= 280) {
+      setOriginalText(value);
+      setOriginalCount(value.length);
+    } else if (name === "fixedThought" && value.length <= 280) {
+      setFixedText(value);
+      setFixedCount(value.length);
+    }
+  };
+
+  return (
+    <div className="card d-flex flex-cloumn bg-white card-rounded w-25">
+      <div className="card-header bg-dark text-center">
+            <h1>Fix a bad thought:</h1>
+          </div>
+      {Auth.loggedIn() ? (
+        <div>
+          <div className="card-body m-5">
             <form onSubmit={handleFormSubmit}>
               <label>Original: </label>
-              <textarea name="original" onChange={handleInputChange}>
-                
-              </textarea>
-              <label>Fixed: </label>
-              <textarea name="fixed" onChange={handleInputChange}>
+              <textarea
+                name="originalthought"
+                placeholder="Here's a new thought..."
+                value={originalThought}
+                className="form-input w-100"
+                style={{ lineHeight: "1.5", resize: "vertical" }}
+                onChange={handleChange}
+              ></textarea>
+                        <p
+            className={`m-0 ${
+              originalCount === 280 || error ? 'text-danger' : ''
+            }`}
+          >
+            Character Count: {originalCount}/280
+          </p>
 
-              </textarea>
-              <button onClick={handleFormSubmit} className="btn btn-danger" type="submit">
-                Post Thought
+              <label>Fixed: </label>
+              <textarea
+                name="fixedthought"
+                placeholder="Change the thought..."
+                value={fixedThought}
+                className="form-input w-100"
+                style={{ lineHeight: "1.5", resize: "vertical" }}
+                onChange={handleChange}
+              ></textarea>
+                        <p
+            className={`m-0 ${
+              fixedCount === 280 || error ? 'text-danger' : ''
+            }`}
+          >
+            Character Count: {fixedCount}/280
+          </p>
+              <button className="btn btn-primary btn-block py-3" type="submit">
+                Add Thought
               </button>
             </form>
+          </div>
+          {error && <div>Something broke</div>}
         </div>
-        {error && <div>Something broke</div>}
-      </div>
-    );
-  };
+      ) : (
+        <p>
+          You need to be logged in to log your thoughts. Please{" "}
+          <Link to="/login">login.</Link>
+        </p>
+      )}
+    </div>
+  );
+};
 
 export default Input;

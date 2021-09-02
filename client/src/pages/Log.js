@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
-import { QUERY_THOUGHTS } from '../utils/queries';
+import { QUERY_ENTRIES } from '../utils/queries';
 import HomeNavbar from '../components/Navbars/HomeNavbar';
 import Input from '../components/Entry/Input';
 
 const Log = () => {
-    const { loading, data } = useQuery(QUERY_THOUGHTS);
+    const { loading, data } = useQuery(QUERY_ENTRIES);
   
     const thoughtList = data?.thought || [];
   
@@ -32,20 +32,20 @@ const Log = () => {
           {loading ? (
             <div>Loading...</div>
           ) : (
-              <select name="log" onChange={handleInputChange}>
+              <div name="log" onChange={handleInputChange}>
                 {thoughtList.map((thought) => {
                   return (
-                    <option key={thought._id}>
+                    <card key={thought._id}>
                         <textarea value={thought.originalThought}>
                         {thought.originalThought}
                         </textarea>
                         <textarea value={thought.fixedThought}>
                         {thought.fixedThought}
                         </textarea>
-                    </option>
+                    </card>
                   );
                 })}
-              </select>
+              </div>
           )}
         </div>
       </div>

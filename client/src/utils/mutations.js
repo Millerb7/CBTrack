@@ -24,9 +24,9 @@ export const LOGIN_USER = gql`
   }
 `;
 
-export const CREATE_ENTRIES = gql`
-  mutation createVote($_id: String!, $originalThought: String!, $fixedThought: String!) {
-    createVote(_id: $_id, originalThought: $originalThought, fixedThought: $fixedThought) {
+export const ADD_ENTRY = gql`
+  mutation addEntry($_id: String!, $originalThought: String!, $fixedThought: String!) {
+    addEntry(_id: $_id, originalThought: $originalThought, fixedThought: $fixedThought) {
       _id
       originalThought
       fixedThought
