@@ -28,6 +28,22 @@ export const QUERY_ENTRIES = gql`
   }
 `;
 
+export const QUERY_DATE = gql`
+query user($email: String!, $date: String!) {
+  user(email: $email, date: $date) {
+    _id
+    name
+    email
+    thoughts (where: {createdAt: {_eq: date}}) {
+      _id 
+      originalThought
+      fixedThoguht
+      createdAt
+    } 
+  }
+}
+`;
+
 export const QUERY_ENTRY = gql`
   query entry($entryId: ID!) {
     entry(entryId: $entryId) {

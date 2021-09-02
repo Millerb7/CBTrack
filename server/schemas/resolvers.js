@@ -9,8 +9,8 @@ const resolvers = {
     user: async (parent, { email }) => {
       return User.findOne({ email }).populate("entries");
     },
-    entries: async (parent, { email }) => {
-      const params = email ? { email } : {};
+    entries: async (parent, { userId }) => {
+      const params = userId ? { userId } : {};
       return Entry.find(params).sort({ createdAt: -1 });
     },
     entry: async (parent, { entryId }) => {
@@ -51,7 +51,7 @@ const resolvers = {
         const entry = await Entry.create({
           originalThought,
           fixedThought,
-          entryAuthor: context.user.email,
+          entryAuthor: context.user._id,
         });
 
         await User.findOneAndUpdate(

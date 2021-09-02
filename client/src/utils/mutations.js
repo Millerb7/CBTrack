@@ -25,8 +25,8 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_ENTRY = gql`
-  mutation addEntry($_id: String!, $originalThought: String!, $fixedThought: String!) {
-    addEntry(_id: $_id, originalThought: $originalThought, fixedThought: $fixedThought) {
+  mutation addEntry($originalThought: String!, $fixedThought: String!) {
+    addEntry(originalThought: $originalThought, fixedThought: $fixedThought) {
       _id
       originalThought
       fixedThought

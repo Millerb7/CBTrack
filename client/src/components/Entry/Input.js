@@ -42,7 +42,7 @@ const Input = () => {
         variables: {
           originalThought,
           fixedThought,
-          thoughtAuthor: Auth.getProfile().data.email,
+          thoughtAuthor: Auth.getProfile().data._id,
         },
       });
 
