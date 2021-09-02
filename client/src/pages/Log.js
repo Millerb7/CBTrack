@@ -1,4 +1,3 @@
-// map entries
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { QUERY_THOUGHTS } from '../utils/queries';

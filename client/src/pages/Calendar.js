@@ -1,10 +1,24 @@
 import React from 'react';
+import Input from '../components/Entry/Input';
+import HomeNavbar from '../components/Navbars/HomeNavbar';
+import Graphic from '../components/Calendar/Graphic';
 
 function Calendar () {
     return (
-        <div className="nav flex-row justify-space-around p-4 m-2 bg-dark">
-            Calendar
+        <div>
+        <HomeNavbar />
+      <div className="card bg-white card-rounded w-50">
+        <div className="card-body m-5">
+          <h2>This is your daily progress!</h2>
+          <div>
+            <Graphic />
+          </div>
         </div>
+        <div className="card-footer text-center m-3">
+          <Input />
+        </div>
+      </div>
+      </div>
     );
 };
 
