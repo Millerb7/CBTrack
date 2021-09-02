@@ -7,7 +7,7 @@ import Input from '../components/Entry/Input';
 const Log = () => {
     const { loading, data } = useQuery(QUERY_ENTRIES);
   
-    const thoughtList = data?.thought || [];
+    const entryList = data?.entry || [];
   
     const [formData, setFormData] = useState({
       originalThought: 'bad',
@@ -33,14 +33,14 @@ const Log = () => {
             <div>Loading...</div>
           ) : (
               <div name="log" onChange={handleInputChange}>
-                {thoughtList.map((thought) => {
+                {entryList.map((entry) => {
                   return (
-                    <card key={thought._id}>
-                        <textarea value={thought.originalThought}>
-                        {thought.originalThought}
+                    <card key={entry._id}>
+                        <textarea value={entry.originalThought}>
+                        {entry.originalThought}
                         </textarea>
-                        <textarea value={thought.fixedThought}>
-                        {thought.fixedThought}
+                        <textarea value={entry.fixedThought}>
+                        {entry.fixedThought}
                         </textarea>
                     </card>
                   );
