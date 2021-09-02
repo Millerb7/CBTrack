@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
-import { QUERY_ENTRIES } from '../utils/queries';
+import { QUERY_ENTRIES } from '../../utils/queries';
+import dateFormat from '../../utils/dateFormat';
 
-const Day = () => {
+const Day = ({ currentDate }) => {
     const { loading, data } = useQuery(QUERY_ENTRIES);
   
     const entryList = data?.entries || [];
-
-    
   
     return (
       <div className="card bg-white card-rounded w-25">
         <div className="card-header bg-dark text-center">
-          <h1>Logs from {data.date}!</h1>
+          <h1>Logs from {dateFormat(currentDate)}!</h1>
         </div>
         <div className="card-body m-5">
           {loading ? (

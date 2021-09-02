@@ -4,7 +4,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@ap
 import { setContext } from '@apollo/client/link/context';
 
 import Home from './pages/Home';
-import Calendar from './pages/Calendar';
+import Daily from './pages/Daily';
 import Settings from './pages/Settings';
 import NotFound from './pages/NotFound';
 import Login from './pages/Login';
@@ -44,7 +44,7 @@ function App() {
                 <Log />
               </Route>
               <Route exact path="/calendar">
-                <Calendar />
+                <Daily />
               </Route>
               <Route exact path="/settings">
                 <Settings />
