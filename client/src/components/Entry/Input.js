@@ -7,6 +7,7 @@ import { QUERY_ENTRIES, QUERY_ME } from "../../utils/queries";
 import Auth from "../../utils/auth";
 
 const Input = () => {
+
   const [originalThought, setOriginalText] = useState("");
   const [fixedThought, setFixedText] = useState("");
 
