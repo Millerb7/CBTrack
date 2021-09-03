@@ -13,7 +13,7 @@ const Input = () => {
   const [originalCount, setOriginalCount] = useState(0);
   const [fixedCount, setFixedCount] = useState(0);
 
-  const [addEntry, { error, data }] = useMutation(ADD_ENTRY)
+  const [addEntry, { error }] = useMutation(ADD_ENTRY)
   //   , {
   //   update(cache, { data: { addEntry } }) {
   //     try {

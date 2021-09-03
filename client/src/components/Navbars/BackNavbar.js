@@ -3,12 +3,8 @@ import { Link } from "react-router-dom";
 
 function BackNavbar() {
   return (
-    <nav className="nav flex-row justify-space-around p-4 m-2 bg-dark">
-      <ul>
-        <li>
-          <Link to="/">back</Link>
-        </li>
-      </ul>
+    <nav className="navbar p-4 m-2">
+          <Link className="navbar-item" to="/">back</Link>
     </nav>
   );
 }

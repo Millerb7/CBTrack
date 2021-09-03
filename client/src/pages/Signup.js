@@ -6,6 +6,7 @@ import { ADD_USER } from '../utils/mutations';
 
 import Auth from '../utils/auth';
 import BackNavbar from '../components/Navbars/BackNavbar';
+import 'bulma/css/bulma.css';
 
 const Signup = () => {
   const [formState, setFormState] = useState({

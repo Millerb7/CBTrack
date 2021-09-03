@@ -5,6 +5,7 @@ import Day from '../components/Entry/Day';
 
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import 'bulma/css/bulma.css';
 
 
 function Daily () {

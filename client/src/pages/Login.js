@@ -5,6 +5,7 @@ import { LOGIN_USER } from '../utils/mutations';
 
 import Auth from '../utils/auth';
 import BackNavbar from '../components/Navbars/BackNavbar';
+import 'bulma/css/bulma.css';
 
 const Login = () => {
   const [formState, setFormState] = useState({ email: '', password: '' });
@@ -42,11 +43,11 @@ const Login = () => {
   };
 
   return (
-    <main className="flex-row justify-center mb-4">
+    <main className="flex-row justify-center has-text-centered mb-4">
       <BackNavbar />
-      <div className="col-12 col-lg-10">
+      <div className="section col-12 col-lg-10">
         <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Login</h4>
+          <h4 className="card-header is-size-1 has-text-weight-bold bg-dark text-light p-2">Login</h4>
           <div className="card-body">
             {data ? (
               <p>
@@ -54,7 +55,7 @@ const Login = () => {
                 <Link to="/">back to the homepage.</Link>
               </p>
             ) : (
-              <div>
+              <div className="field">
               <form onSubmit={handleFormSubmit}>
                 <input
                   className="form-input"
@@ -73,7 +74,7 @@ const Login = () => {
                   onChange={handleChange}
                 />
                 <button
-                  className="btn btn-block btn-primary"
+                  className="buttonn is-primary"
                   style={{ cursor: 'pointer' }}
                   type="submit"
                 >
@@ -87,7 +88,7 @@ const Login = () => {
             )}
 
             {error && (
-              <div className="my-3 p-3 bg-danger text-white">
+              <div className="my-3 p-3">
                 {error.message}
               </div>
             )}

@@ -2,6 +2,7 @@ import React from 'react';
 import Input from '../components/Entry/Input';
 import HomeNavbar from '../components/Navbars/HomeNavbar';
 import Articles from '../components/Articles/Articles';
+import 'bulma/css/bulma.css';
 
 const Home = () => {
   // logic to decide what is shown
