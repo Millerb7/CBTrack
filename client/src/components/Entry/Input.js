@@ -13,7 +13,7 @@ const Input = () => {
   const [originalCount, setOriginalCount] = useState(0);
   const [fixedCount, setFixedCount] = useState(0);
 
-  const [addEntry, { error }] = useMutation(ADD_ENTRY)
+  const [addEntry, { error }] = useMutation(ADD_ENTRY);
   //   , {
   //   update(cache, { data: { addEntry } }) {
   //     try {
@@ -68,49 +68,53 @@ const Input = () => {
   };
 
   return (
-    <div className="card d-flex flex-cloumn bg-white card-rounded w-25">
-      <div className="card-header bg-dark text-center">
-        <h1>Fix a bad thought:</h1>
-      </div>
-      {Auth.loggedIn() ? (
-        <div>
-          <div className="card-body m-5">
-            <form onSubmit={handleFormSubmit}>
-              <label>Original: </label>
-              <textarea
-                name="originalThought"
-                placeholder="Here's a new thought..."
-                value={originalThought}
-                className="form-input w-100"
-                style={{ lineHeight: "1.5", resize: "vertical" }}
-                onChange={handleChange}
-              ></textarea>
-              <p>Character Count: {originalCount}/280</p>
-
-              <label>Fixed: </label>
-              <textarea
-                name="fixedThought"
-                placeholder="Change the thought..."
-                value={fixedThought}
-                className="form-input w-100"
-                style={{ lineHeight: "1.5", resize: "vertical" }}
-                onChange={handleChange}
-              ></textarea>
-              <p>Character Count: {fixedCount}/280</p>
-              <button className="btn btn-primary btn-block py-3" type="submit">
-                Add Thought
-              </button>
-            </form>
+    <footer className="tile is-ancestor has-background-light m-1">
+      <div className="tile is-parent box is-flex is-flex-direction-column">
+        <h1 className="is-size-4 has-text-centered p-3">Fix a bad thought:</h1>
+        {Auth.loggedIn() ? (
+          <div className="has-text-centered">
+              <form onSubmit={handleFormSubmit}>
+                <div className="tile is-child box is-flex is-flex-direction-column mx-4">
+                  <textarea
+                    name="originalThought"
+                    placeholder="Here's a new thought..."
+                    value={originalThought}
+                    className="textarea"
+                    style={{ lineHeight: "1.5", resize: "vertical" }}
+                    onChange={handleChange}
+                    rows={3}
+                  ></textarea>
+                  <p>Character Count: {originalCount}/280</p>
+                </div>
+                <div className="tile is-child box is-flex is-flex-direction-column">
+                  <textarea
+                    name="fixedThought"
+                    placeholder="Change the thought..."
+                    value={fixedThought}
+                    className="textarea"
+                    style={{ lineHeight: "1.5", resize: "vertical" }}
+                    onChange={handleChange}
+                    rows={3}
+                  ></textarea>
+                  <p>Character Count: {fixedCount}/280</p>
+                </div>
+                <button
+                  className="button is-fullwidth py-3"
+                  type="submit"
+                >
+                  Add Thought
+                </button>
+              </form>
+            {error && <div>Something broke</div>}
           </div>
-          {error && <div>Something broke</div>}
-        </div>
-      ) : (
-        <p>
-          You need to be logged in to log your thoughts. Please{" "}
-          <Link to="/login">login.</Link>
-        </p>
-      )}
-    </div>
+        ) : (
+          <p>
+            You need to be logged in to log your thoughts. Please{" "}
+            <Link to="/login">login.</Link>
+          </p>
+        )}
+      </div>
+    </footer>
   );
 };
 

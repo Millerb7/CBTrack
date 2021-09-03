@@ -10,14 +10,14 @@ const Home = () => {
   return (
     <div>
       <HomeNavbar />
-    <div className="card bg-white card-rounded w-50">
-      <div className="card-body m-5">
-        <h2>Welcome to self help!</h2>
+      <div className="tile is-ancestor">
+        <div className="tile is-parent box is-flex is-flex-direction-column is-align-items-center m-5">
+        <h1 className="title is-size-1">Welcome to self help!</h1>
         <div>
           <Articles />
         </div>
       </div>
-      <div className="card-footer text-center m-3">
+      <div>
         <Input />
       </div>
     </div>

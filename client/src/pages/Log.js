@@ -19,19 +19,16 @@ const Log = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
-  if(!entryList) {
-    return <div>No logs yet!</div>;
-  }
 
   return (
-    <div>
+    <div className="">
       <HomeNavbar />
-      <div className="flex-row justify-space-between my-4">
+      <div className="is-flex flex-row justify-space-between my-4">
         {entryList &&
           entryList.map((entry) => (
-            <div key={entry} className="col-12 col-xl-6">
-              <div className="card mb-3">
-                <h4 className="card-header bg-dark text-light p-2 m-0 display-flex align-center">
+            <div key={entry} className="">
+              <div className="">
+                <h4 className="">
                   <span>{entry}</span>
                 </h4>
               </div>
@@ -39,7 +36,7 @@ const Log = () => {
           ))}
       </div>
       {error && (
-        <div className="my-3 p-3 bg-danger text-white">{error.message}</div>
+        <div className="my-3 p-3">{error.message}</div>
       )}
       <Input />
     </div>

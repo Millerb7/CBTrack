@@ -9,11 +9,12 @@ const Day = ({ currentDate }) => {
     const entryList = data?.entries || [];
   
     return (
-      <div className="card bg-white card-rounded w-25">
-        <div className="card-header bg-dark text-center">
-          <h1>Logs from {dateFormat(currentDate)}!</h1>
+      <div className="tile is-ancestor">
+        <div className="tile is-parent box">
+        <div className="has-text-centered">
+          <h1 className="title">Logs from {dateFormat(currentDate)}!</h1>
         </div>
-        <div className="card-body m-5">
+        <div className="m-5">
           {loading ? (
             <div>Loading...</div>
           ) : (
@@ -32,6 +33,7 @@ const Day = ({ currentDate }) => {
                 })}
               </div>
           )}
+        </div>
         </div>
       </div>
     );
