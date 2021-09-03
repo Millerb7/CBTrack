@@ -17,8 +17,8 @@ export const QUERY_USER = gql`
 `;
 
 export const QUERY_ENTRIES = gql`
-  query entries {
-    entries {
+  query entries($userId: ID!) {
+    entries(userId: $userId) {
       _id
       originalThought
       fixedThought
