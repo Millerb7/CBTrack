@@ -28,6 +28,7 @@ const typeDefs = gql`
     entries(userId: ID!): [Entry]
     entry(entryId: ID!): Entry
     me: User
+    date: User
   }
 
   type Mutation {

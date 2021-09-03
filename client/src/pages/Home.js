@@ -17,10 +17,8 @@ const Home = () => {
           <Articles />
         </div>
       </div>
-      <div>
-        <Input />
-      </div>
     </div>
+    <Input />
     </div>
   );
 };

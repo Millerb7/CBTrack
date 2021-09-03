@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Input from "../components/Entry/Input";
 import HomeNavbar from "../components/Navbars/HomeNavbar";
 import Day from "../components/Entry/Day";
+import dateFormat from '../utils/dateFormat';
 
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
@@ -12,7 +13,7 @@ function Daily() {
 
   const onDateClick = (newDate) => {
     setDate(newDate);
-    console.log(date);
+    console.log(dateFormat(date));
   };
 
   return (
@@ -33,7 +34,7 @@ function Daily() {
             />
           </div>
           <div>
-            <Day currentDay={date} />
+            <Day currentDate={dateFormat(date)} />
           </div>
         </div>
       </div>

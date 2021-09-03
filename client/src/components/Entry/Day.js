@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { QUERY_DATE } from '../../utils/queries';
-import dateFormat from '../../utils/dateFormat';
+import Auth from '../../utils/auth';
 
 const Day = ({ currentDate }) => {
-    const { loading, data } = useQuery(QUERY_DATE);
-  
-    const entryList = data?.entries || [];
+  const { loading, data, error } = useQuery(QUERY_DATE, {
+    variables: { email: Auth.getProfile().data.email, date: currentDate }
+  });
+
+  const entryList = data?.user.entries || [];
+
+  console.log(data);
   
     return (
+      <div>
       <div className="tile is-ancestor">
         <div className="tile is-parent box">
         <div className="has-text-centered">
-          <h1 className="title">Logs from {dateFormat(currentDate)}!</h1>
+          <h1 className="title">Logs from {currentDate}!</h1>
         </div>
         <div className="m-5">
           {loading ? (
@@ -35,6 +40,10 @@ const Day = ({ currentDate }) => {
           )}
         </div>
         </div>
+      </div>
+      {error && (
+        <div className="my-3 p-3">{error.message}</div>
+      )}
       </div>
     );
   };

@@ -13,27 +13,26 @@ const Input = () => {
   const [originalCount, setOriginalCount] = useState(0);
   const [fixedCount, setFixedCount] = useState(0);
 
-  const [addEntry, { error }] = useMutation(ADD_ENTRY);
-  //   , {
-  //   update(cache, { data: { addEntry } }) {
-  //     try {
-  //       const { entries } = cache.readQuery({ query: QUERY_ENTRIES });
+  const [addEntry, { error }] = useMutation(ADD_ENTRY, {
+    update(cache, { data: { addEntry } }) {
+      try {
+        const { entries } = cache.readQuery({ query: QUERY_ENTRIES });
 
-  //       cache.writeQuery({
-  //         query: QUERY_ENTRIES,
-  //         data: { entries: [addEntry, ...entries] },
-  //       });
-  //     } catch (e) {
-  //       console.error(e);
-  //     }
+        cache.writeQuery({
+          query: QUERY_ENTRIES,
+          data: { entries: [addEntry, ...entries] },
+        });
+      } catch (e) {
+        console.error(e);
+      }
 
-  //     const { me } = cache.readQuery({ query: QUERY_ME });
-  //     cache.writeQuery({
-  //       query: QUERY_ME,
-  //       data: { me: { ...me, entries: [addEntry, ...me.entries] } },
-  //     });
-  //   }
-  // });
+      const { me } = cache.readQuery({ query: QUERY_ME });
+      cache.writeQuery({
+        query: QUERY_ME,
+        data: { me: { ...me, entries: [addEntry, ...me.entries] } },
+      });
+    },
+  });
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -73,38 +72,35 @@ const Input = () => {
         <h1 className="is-size-4 has-text-centered p-3">Fix a bad thought:</h1>
         {Auth.loggedIn() ? (
           <div className="has-text-centered">
-              <form onSubmit={handleFormSubmit}>
-                <div className="tile is-child box is-flex is-flex-direction-column mx-4">
-                  <textarea
-                    name="originalThought"
-                    placeholder="Here's a new thought..."
-                    value={originalThought}
-                    className="textarea"
-                    style={{ lineHeight: "1.5", resize: "vertical" }}
-                    onChange={handleChange}
-                    rows={3}
-                  ></textarea>
-                  <p>Character Count: {originalCount}/280</p>
-                </div>
-                <div className="tile is-child box is-flex is-flex-direction-column">
-                  <textarea
-                    name="fixedThought"
-                    placeholder="Change the thought..."
-                    value={fixedThought}
-                    className="textarea"
-                    style={{ lineHeight: "1.5", resize: "vertical" }}
-                    onChange={handleChange}
-                    rows={3}
-                  ></textarea>
-                  <p>Character Count: {fixedCount}/280</p>
-                </div>
-                <button
-                  className="button is-fullwidth py-3"
-                  type="submit"
-                >
-                  Add Thought
-                </button>
-              </form>
+            <form onSubmit={handleFormSubmit}>
+              <div className="tile is-child box is-flex is-flex-direction-column mx-4">
+                <textarea
+                  name="originalThought"
+                  placeholder="Here's a new thought..."
+                  value={originalThought}
+                  className="textarea"
+                  style={{ lineHeight: "1.5", resize: "vertical" }}
+                  onChange={handleChange}
+                  rows={3}
+                ></textarea>
+                <p>Character Count: {originalCount}/280</p>
+              </div>
+              <div className="tile is-child box is-flex is-flex-direction-column">
+                <textarea
+                  name="fixedThought"
+                  placeholder="Change the thought..."
+                  value={fixedThought}
+                  className="textarea"
+                  style={{ lineHeight: "1.5", resize: "vertical" }}
+                  onChange={handleChange}
+                  rows={3}
+                ></textarea>
+                <p>Character Count: {fixedCount}/280</p>
+              </div>
+              <button className="button is-fullwidth py-3" type="submit">
+                Add Thought
+              </button>
+            </form>
             {error && <div>Something broke</div>}
           </div>
         ) : (

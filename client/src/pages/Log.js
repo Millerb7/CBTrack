@@ -12,25 +12,26 @@ const Log = () => {
     variables: { email: Auth.getProfile().data.email }
   });
 
-  const entryList = data?.entries || [];
+  const entryList = data?.user.entries || [];
 
-  console.log(data);
+  console.log(data?.user.entries);
 
   if (loading) {
     return <div>Loading...</div>;
   }
+  if (!entryList) {
+    return <div>No logs yet!</div>;
+  } 
 
   return (
     <div className="">
       <HomeNavbar />
-      <div className="is-flex flex-row justify-space-between my-4">
-        {entryList &&
-          entryList.map((entry) => (
-            <div key={entry} className="">
-              <div className="">
-                <h4 className="">
-                  <span>{entry}</span>
-                </h4>
+      <div className="tile is-ancestor is-flex is-flex-direction-column m-3">
+        {entryList && entryList.map((entry) => (
+            <div key={entry.id} className="tile is-parent box">
+              <div className="tile is-child">
+                  <p>{entry.originalThought}</p>
+                  <p>{entry.fixedThought}</p>
               </div>
             </div>
           ))}

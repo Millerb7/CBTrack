@@ -12,8 +12,14 @@ code {
     monospace;
 }
 
+nav {
+  position:fixed;
+  Width: 100%;
+  top: 0;
+}
+
 footer {
-  position: fixed;
+  position:sticky;
   Width: 100%;
   bottom: 0;
 }
