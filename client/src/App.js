@@ -32,7 +32,6 @@ const client = new ApolloClient({
 
 function App() {
   return (
-    <div>
       <ApolloProvider client={client}>
         <Router className="bg-warning">
           <div className="flex-column justify-center align-center min-100-vh bg-primary">
@@ -62,7 +61,6 @@ function App() {
           </div>
         </Router>
       </ApolloProvider>
-    </div>
   );
 }
 

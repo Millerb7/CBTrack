@@ -28,7 +28,7 @@ const typeDefs = gql`
     entries(userId: ID!): [Entry]
     entry(entryId: ID!): Entry
     me: User
-    date: User
+    day(userId: ID!, day: String!): [Entry]
   }
 
   type Mutation {

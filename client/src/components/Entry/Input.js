@@ -20,7 +20,7 @@ const Input = () => {
 
         cache.writeQuery({
           query: QUERY_ENTRIES,
-          data: { entries: [addEntry, ...entries] },
+          data: { entry: [ addEntry, ...entries ] },
         });
       } catch (e) {
         console.error(e);
@@ -72,8 +72,8 @@ const Input = () => {
         <h1 className="is-size-4 has-text-centered p-3">Fix a bad thought:</h1>
         {Auth.loggedIn() ? (
           <div className="has-text-centered">
-            <form onSubmit={handleFormSubmit}>
-              <div className="tile is-child box is-flex is-flex-direction-column mx-4">
+            <form onSubmit={handleFormSubmit} className="is-flex is-flex-direction-row is-flex-wrap-wrap">
+              <div className="tile is-child box is-6">
                 <textarea
                   name="originalThought"
                   placeholder="Here's a new thought..."
@@ -83,9 +83,8 @@ const Input = () => {
                   onChange={handleChange}
                   rows={3}
                 ></textarea>
-                <p>Character Count: {originalCount}/280</p>
               </div>
-              <div className="tile is-child box is-flex is-flex-direction-column">
+              <div className="tile is-child box is-6">
                 <textarea
                   name="fixedThought"
                   placeholder="Change the thought..."
@@ -95,16 +94,14 @@ const Input = () => {
                   onChange={handleChange}
                   rows={3}
                 ></textarea>
-                <p>Character Count: {fixedCount}/280</p>
               </div>
               <button className="button is-fullwidth py-3" type="submit">
                 Add Thought
               </button>
             </form>
-            {error && <div>Something broke</div>}
           </div>
         ) : (
-          <p>
+          <p className="has-text-centered">
             You need to be logged in to log your thoughts. Please{" "}
             <Link to="/login">login.</Link>
           </p>

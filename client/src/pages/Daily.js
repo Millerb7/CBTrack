@@ -34,7 +34,7 @@ function Daily() {
             />
           </div>
           <div>
-            <Day currentDate={dateFormat(date)} />
+            <Day currentDate={ date } />
           </div>
         </div>
       </div>

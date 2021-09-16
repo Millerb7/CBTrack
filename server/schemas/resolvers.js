@@ -16,6 +16,9 @@ const resolvers = {
     entry: async (parent, { entryId }) => {
       return Entry.findOne({ _id: entryId });
     },
+    day: async (parent, { userId, day }) => {
+      return Entry.find({ entryAuthor: userId, createdAt: day });
+    },
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate("entries");
@@ -56,7 +59,7 @@ const resolvers = {
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { entries: entry._id } }
+          { $addToSet: { entries: entry } }
         );
 
         return entry;

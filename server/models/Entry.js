@@ -22,9 +22,9 @@ const entrySchema = new Schema ({
         trim: true,
     },
     createdAt: {
-        type: Date,
-        default: Date.now,
-        get: (timestamp) => dateFormat(timestamp),
+        type: String,
+        default: "today",
+        get: (timestamp) => dateFormat(Date.now),
     }
 });
 

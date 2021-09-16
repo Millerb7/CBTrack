@@ -17,6 +17,18 @@ export const QUERY_USER = gql`
 `;
 
 export const QUERY_ENTRIES = gql`
+  query getEntry {
+    entry {
+      _id
+      originalThought
+      fixedThought
+      entryAuthor
+      createdAt
+    }
+  }
+`;
+
+export const QUERY_USER_ENTRIES = gql`
   query user($email: String!) {
     user(email: $email) {
       entries {
@@ -30,20 +42,16 @@ export const QUERY_ENTRIES = gql`
   }
 `;
 
-export const QUERY_DATE = gql`
-  query user($email: String!, $date: String!) {
-    user(email: $email, date: $date) {
+export const QUERY_DAY = gql`
+query day($userId: ID!, $day: String!) {
+  day (userId: $userId, day: $day) {
       _id
-      name
-      email
-      entries(where: { createdAt: { _eq: date } }) {
-        _id
-        originalThought
-        fixedThoguht
-        createdAt
-      }
-    }
+      originalThought
+      fixedThought
+      entryAuthor
+      createdAt
   }
+}
 `;
 
 export const QUERY_ENTRY = gql`
