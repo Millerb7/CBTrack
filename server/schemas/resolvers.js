@@ -1,7 +1,26 @@
 const { User, Entry } = require("../models");
 const { signToken } = require("../utils/auth");
+const { Kind, GraphQLScalarType } = require('graphql');
+const dateFormat = require("../utils/dateFormat");
 
 const resolvers = {
+  /*Date: new GraphQLScalarType({
+    name: 'Date',
+    description: 'Date custom scalar type',
+    parseValue(value) {
+      return new Date(value);
+    },
+    serialize(value) {
+      const date = new Date(value);
+      return date;
+    },
+    parseLiteral(ast){
+      if (ast.kind === Kind.INT) {
+        return parseInt(ast.value, 10);
+      }
+      return null;
+    },
+  }),*/
   Query: {
     users: async () => {
       return User.find().populate("entries");
@@ -17,7 +36,8 @@ const resolvers = {
       return Entry.findOne({ _id: entryId });
     },
     day: async (parent, { userId, day }) => {
-      return Entry.find({ entryAuthor: userId, createdAt: day });
+      let date = new Date(day);
+      return Entry.find({ entryAuthor: userId, createdAt: date });
     },
     me: async (parent, args, context) => {
       if (context.user) {

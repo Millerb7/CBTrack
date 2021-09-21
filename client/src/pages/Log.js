@@ -43,7 +43,7 @@ const Log = () => {
                   <p>{entry.fixedThought}</p>
                 </div>
               </div>
-              <p className="has-text-right">{dateFormat(entry.createdAt)}</p>
+              <p className="has-text-right">{entry.createdAt}</p>
             </div>
           ))}
       </div>

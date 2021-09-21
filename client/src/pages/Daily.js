@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Input from "../components/Entry/Input";
 import HomeNavbar from "../components/Navbars/HomeNavbar";
 import Day from "../components/Entry/Day";
-import dateFormat from '../utils/dateFormat';
 
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
@@ -10,10 +9,9 @@ import "bulma/css/bulma.css";
 
 function Daily() {
   const [date, setDate] = useState(new Date());
-
+  
   const onDateClick = (newDate) => {
     setDate(newDate);
-    console.log(dateFormat(date));
   };
 
   return (

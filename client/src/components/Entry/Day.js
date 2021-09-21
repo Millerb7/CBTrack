@@ -3,14 +3,16 @@ import { useQuery } from '@apollo/client';
 import { QUERY_DAY } from '../../utils/queries';
 import Auth from '../../utils/auth';
 import dateFormat from '../../utils/dateFormat';
+import dayFormat from '../../utils/dayFormat';
 
 const Day = ({ currentDate }) => {
-  console.log('peepo ' + currentDate);
+  console.log(dayFormat(currentDate));
   const { loading, data, error } = useQuery(QUERY_DAY, {
-    variables: { userId: Auth.getProfile().data._id, day: dateFormat(currentDate) }
+    variables: { userId: Auth.getProfile().data._id, day: dayFormat(currentDate).toString() }
   });
-
-  const entryList = data?.user.entries || [];
+  
+  console.log(data);
+  const entryList = data?.day || [];
   
     return (
       <div>
@@ -26,14 +28,14 @@ const Day = ({ currentDate }) => {
               <div name="log">
                 {entryList.map((entry) => {
                   return (
-                    <card key={entry._id}>
-                        <textarea value={entry.originalThought} readonly>
+                    <div key={entry._id}>
+                        <textarea value={entry.originalThought} readOnly>
                         {entry.originalThought}
                         </textarea>
-                        <textarea value={entry.fixedThought} readonly>
+                        <textarea value={entry.fixedThought} readOnly>
                         {entry.fixedThought}
                         </textarea>
-                    </card>
+                    </div>
                   );
                 })}
               </div>

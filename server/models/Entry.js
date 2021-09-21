@@ -22,11 +22,18 @@ const entrySchema = new Schema ({
         trim: true,
     },
     createdAt: {
-        type: String,
-        default: "today",
-        get: (timestamp) => dateFormat(Date.now),
+        type: Date,
+        default: Date.now,
+        get: (timestamp) => dateFormat(timestamp),
     }
 });
+
+entrySchema.pre('save', async function (next) {
+    if (this.isNew || this.isModified('createdAt')) {
+        get: (timestamp) => dateFormat(timestamp)
+    }
+    next();
+  });
 
 const Entry = model('Entry', entrySchema);
 
