@@ -4,23 +4,6 @@ const { Kind, GraphQLScalarType } = require('graphql');
 const dateFormat = require("../utils/dateFormat");
 
 const resolvers = {
-  /*Date: new GraphQLScalarType({
-    name: 'Date',
-    description: 'Date custom scalar type',
-    parseValue(value) {
-      return new Date(value);
-    },
-    serialize(value) {
-      const date = new Date(value);
-      return date;
-    },
-    parseLiteral(ast){
-      if (ast.kind === Kind.INT) {
-        return parseInt(ast.value, 10);
-      }
-      return null;
-    },
-  }),*/
   Query: {
     users: async () => {
       return User.find().populate("entries");
@@ -30,14 +13,15 @@ const resolvers = {
     },
     entries: async (parent, { userId }) => {
       const params = userId ? { userId } : {};
-      return Entry.find(params).sort({ createdAt: -1 });
+      return Entry.find(params);
     },
     entry: async (parent, { entryId }) => {
       return Entry.findOne({ _id: entryId });
     },
     day: async (parent, { userId, day }) => {
-      let date = new Date(day);
-      return Entry.find({ entryAuthor: userId, createdAt: date });
+      const dayStart = new Date(day + ' 00:00:00');
+      const dayEnd = new Date(day + '  23:59:59');
+      return Entry.find({ entryAuthor: userId, createdAt: { $gte: dayStart, $lte: dayEnd } });
     },
     me: async (parent, args, context) => {
       if (context.user) {
