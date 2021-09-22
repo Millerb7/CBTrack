@@ -9,7 +9,7 @@ function HomeNavbar() {
   };
 
   return (
-    <nav className="navbar is-flex is-justify-content-space-around has-background-light p-4 m-2">
+    <nav className="navbar is-flex is-justify-content-space-around has-background-light p-4 m-4">
       <Link className="navbar-item" to="/">
         Home
       </Link>

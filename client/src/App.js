@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import "bulma/css/bulma.css";
 
 import Home from './pages/Home';
 import Daily from './pages/Daily';
@@ -25,6 +26,12 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
+const styles = {
+  body: {
+    background: 'var(--dark)',
+  }
+};
+
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
@@ -34,7 +41,7 @@ function App() {
   return (
       <ApolloProvider client={client}>
         <Router className="bg-warning">
-          <div className="flex-column justify-center align-center min-100-vh bg-primary">
+          <div>
             <Switch>
               <Route exact path="/">
                 <Home />

@@ -17,7 +17,7 @@ function Daily() {
   return (
     <div>
       <HomeNavbar />
-      <div className="tile is-ancestor">
+      <div className="ancestor tile is-ancestor">
         <div className="tile is-parent box is-flex is-flex-direction-column is-align-items-center m-5">
           <h1 className="title is-size-1">This is your daily progress!</h1>
           <div className="p-4 m-2 bg-dark">
