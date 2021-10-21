@@ -33,3 +33,5 @@ db.once('open', () => {
     console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
   });
 });
+
+// mongodb+srv://workout-admin:workout@cluster0.pwuey.mongodb.net/cbt?retryWrites=true&w=majority
