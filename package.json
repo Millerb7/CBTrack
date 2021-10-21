@@ -12,7 +12,8 @@
   },
   "author": "Miller Boyd",
   "license": "ISC",
-  "devDependencies": {
+  "devDependencies": {},
+  "dependencies": {
     "concurrently": "^6.3.0"
   }
 }
