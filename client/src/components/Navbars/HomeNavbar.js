@@ -9,30 +9,36 @@ function HomeNavbar() {
   };
 
   return (
-    <nav className="navbar is-flex is-justify-content-space-around has-background-light p-4 m-4">
-      <Link className="navbar-item" to="/">
-        Home
-      </Link>
-      <Link className="navbar-item" to="/log">
-        Log
-      </Link>
-      <Link className="navbar-item" to="/calendar">
-        Calendar
-      </Link>
-      <Link className="navbar-item" to="/settings">
-        Options
-      </Link>
-
+    <div>
       {Auth.loggedIn() ? (
-        <Link onClick={logout} className="navbar-item" to="/">
-          Logout
-        </Link>
+        <nav className="navbar is-flex is-justify-content-space-around has-background-light p-4 m-4">
+          <Link className="navbar-item" to="/">
+            Home
+          </Link>
+          <Link className="navbar-item" to="/log">
+            Log
+          </Link>
+          <Link className="navbar-item" to="/calendar">
+            Calendar
+          </Link>
+          <Link className="navbar-item" to="/settings">
+            Options
+          </Link>
+          <Link onClick={logout} className="navbar-item" to="/">
+            Logout
+          </Link>
+        </nav>
       ) : (
-        <Link className="navbar-item" to="/login">
+        <nav className="navbar is-flex is-justify-content-space-around has-background-light p-4 m-4">
+          <Link className="navbar-item" to="/">
+            Home
+          </Link>
+          <Link className="navbar-item" to="/login">
           Login
         </Link>
+        </nav>
       )}
-    </nav>
+    </div>
   );
 }
 
