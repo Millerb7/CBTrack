@@ -40,8 +40,7 @@ const client = new ApolloClient({
 function App() {
   return (
       <ApolloProvider client={client}>
-        <Router className="bg-warning">
-          <div>
+        <Router>
             <Switch>
               <Route exact path="/">
                 <Home />
@@ -65,7 +64,6 @@ function App() {
                 <NotFound />
               </Route>
             </Switch>
-          </div>
         </Router>
       </ApolloProvider>
   );

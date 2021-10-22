@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Auth from "../../utils/auth";
+import './nav.css';
 
 function HomeNavbar() {
   const logout = (event) => {
@@ -9,9 +10,9 @@ function HomeNavbar() {
   };
 
   return (
-    <div>
+    <nav className="navbar">
       {Auth.loggedIn() ? (
-        <nav className="navbar is-flex is-justify-content-space-around has-background-light p-4 m-4">
+        <div className="is-flex is-justify-content-space-around p-2 m-2">
           <Link className="navbar-item" to="/">
             Home
           </Link>
@@ -27,18 +28,18 @@ function HomeNavbar() {
           <Link onClick={logout} className="navbar-item" to="/">
             Logout
           </Link>
-        </nav>
+        </div>
       ) : (
-        <nav className="navbar is-flex is-justify-content-space-around has-background-light p-4 m-4">
+        <div className="is-flex is-justify-content-space-around p-2 m-2">
           <Link className="navbar-item" to="/">
             Home
           </Link>
           <Link className="navbar-item" to="/login">
-          Login
-        </Link>
-        </nav>
+            Login
+          </Link>
+        </div>
       )}
-    </div>
+    </nav>
   );
 }
 
