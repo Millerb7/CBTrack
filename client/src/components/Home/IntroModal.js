@@ -1,21 +1,24 @@
 import React, { useState } from 'react';
 import PageOne from '../Introduction/PageOne';
 import PageTwo from '../Introduction/PageTwo';
+import PageThree from '../Introduction/PageThree';
 
 function IntroModal ({ closeModal }) {
     const [currentPage, setPage] = useState(false);
 
     const getPage = () => {
         if(currentPage <= 0) {
-            setPage(2);
-        } else if(currentPage >= 3) {
+            setPage(3);
+        } else if(currentPage >= 4) {
             setPage(1);
         }
 
         if(currentPage === 1) {
             return <PageOne />;
-        } else {
+        } else if(currentPage === 2) {
             return <PageTwo />;
+        } else if(currentPage === 3) {
+            return <PageThree />;
         }
     }
 
@@ -25,14 +28,16 @@ function IntroModal ({ closeModal }) {
             <div className="modal-card">
                 <section className="modal-card-body">
                     <div className=" is-flex is-flex-direction-row has-text-centered">
-                        <div className="column is-1" onClick={() => setPage(currentPage-1)}> ( </div>
+                        <div className="column is-1 is-flex is-align-items-center" onClick={() => setPage(currentPage-1)}><i className="fas fa-chevron-left"></i></div>
                         
                         {getPage()}
 
-                        <div className="column is-1" onClick={() => setPage(currentPage+1)}> ) </div>
+                        <div className="column is-1 is-flex is-align-items-center" onClick={() => setPage(currentPage+1)}><i className="fas fa-chevron-right"></i></div>
                     </div>
                     <div className="has-text-centered">
-                        . . .
+                        {currentPage===1 ? (<i class="fas fa-circle p-1"></i>) : (<i class="far fa-circle p-1"></i>)}
+                        {currentPage===2 ? (<i class="fas fa-circle p-1"></i>) : (<i class="far fa-circle p-1"></i>)}
+                        {currentPage===3 ? (<i class="fas fa-circle p-1"></i>) : (<i class="far fa-circle p-1"></i>)}
                     </div>
                 </section>
                 
