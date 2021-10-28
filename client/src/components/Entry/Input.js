@@ -3,15 +3,13 @@ import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_ENTRY } from "../../utils/mutations";
 import { QUERY_ENTRIES, QUERY_ME } from "../../utils/queries";
-
+import EntryModal from "./EntryModal";
 import Auth from "../../utils/auth";
 
 const Input = () => {
   const [originalThought, setOriginalText] = useState("");
   const [fixedThought, setFixedText] = useState("");
-
-  const [originalCount, setOriginalCount] = useState(0);
-  const [fixedCount, setFixedCount] = useState(0);
+  const [modal, setModal] = useState(false);
 
   const [addEntry, { error }] = useMutation(ADD_ENTRY, {
     update(cache, { data: { addEntry } }) {
@@ -56,13 +54,11 @@ const Input = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === "originalThought" && value.length <= 280) {
+    if (name === "originalThought") {
       setOriginalText(value);
-      setOriginalCount(value.length);
     }
-    if (name === "fixedThought" && value.length <= 280) {
+    if (name === "fixedThought") {
       setFixedText(value);
-      setFixedCount(value.length);
     }
   };
 
@@ -98,6 +94,10 @@ const Input = () => {
               <button className="button is-fullwidth py-3" type="submit">
                 Add Thought
               </button>
+              <button className="button is-fullwidth py-3" type="click" onClick={() => setModal(true)}>
+                modal
+              </button>
+              {modal && <EntryModal closeModal={setModal} originalThought={originalThought} setOriginalThought={setOriginalText} setFixedThought={setFixedText} handleFormSubmit={handleFormSubmit} />}
             </form>
           </div>
         ) : (

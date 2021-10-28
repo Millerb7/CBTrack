@@ -10,6 +10,9 @@ export const QUERY_USER = gql`
         _id
         originalThought
         fixedThoguht
+        incident
+        location
+        people
         createdAt
       }
     }
@@ -22,6 +25,9 @@ export const QUERY_ENTRIES = gql`
       _id
       originalThought
       fixedThought
+      incident
+      location
+      people
       entryAuthor
       createdAt
     }
@@ -35,6 +41,9 @@ export const QUERY_USER_ENTRIES = gql`
         _id
         originalThought
         fixedThought
+        incident
+        location
+        people
         entryAuthor
         createdAt
       }
@@ -48,6 +57,9 @@ query day($userId: ID!, $day: String!) {
       _id
       originalThought
       fixedThought
+      incident
+      location
+      people
       entryAuthor
       createdAt
   }
@@ -60,6 +72,9 @@ export const QUERY_ENTRY = gql`
       _id
       originalThought
       fixedThought
+      incident
+      location
+      people
       entryAuthor
       createdAt
     }
@@ -76,6 +91,9 @@ export const QUERY_ME = gql`
         _id
         originalThought
         fixedThought
+        incident
+        location
+        people
         entryAuthor
         createdAt
       }

@@ -10,8 +10,25 @@ const entrySchema = new Schema ({
         trim: true,
     },
     fixedThought: {
+            type: String,
+            minlength: 1,
+            maxlength: 280,
+            trim: true,
+    },
+    incident: {
         type: String,
-        required: true,
+        minlength: 1,
+        maxlength: 280,
+        trim: true,
+    },
+    location: {
+        type: String,
+        minlength: 1,
+        maxlength: 280,
+        trim: true,
+    },
+    people: {
+        type: String,
         minlength: 1,
         maxlength: 280,
         trim: true,
