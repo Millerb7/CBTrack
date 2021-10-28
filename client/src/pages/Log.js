@@ -33,15 +33,42 @@ const Log = () => {
               key={entry._id}
               className="tile is-parent box is-flex is-flex-direction-column"
             >
-              <div className="tile p-3">
-                <div className="tile is-6 is-child box">
-                  <h3 className="has-text-centered">Original Thought:</h3>
-                  <p>{entry.originalThought}</p>
+              <div className="tile p-3 is-flex is-flex-direction-column">
+                <div className="">
+                  <h3>{entry.originalThought}</h3>
                 </div>
-                <div className="tile is-6 is-child box">
-                  <h3 className="has-text-centered">Fixed Thought:</h3>
-                  <p>{entry.fixedThought}</p>
-                </div>
+                {entry.fixedThought ? (
+                  <div className="is-flex is-flex-direction-row">
+                    <h3 className="has-text-centered">Changed Thought: </h3>
+                    <p>{entry.fixedThought}</p>
+                  </div>
+                ) : (
+                  <></>
+                )}
+                {entry.incident ? (
+                  <div className="is-flex is-flex-direction-row">
+                    <h3 className="has-text-centered">What caused thought: </h3>
+                    <p>{entry.incident}</p>
+                  </div>
+                ) : (
+                  <></>
+                )}
+                {entry.location ? (
+                  <div className="is-flex is-flex-direction-row">
+                    <h3 className="has-text-centered">Where thought occured: </h3>
+                    <p>{entry.location}</p>
+                  </div>
+                ) : (
+                  <></>
+                )}
+                {entry.people ? (
+                  <div className="is-flex is-flex-direction-row">
+                    <h3 className="has-text-centered">Who was involved: </h3>
+                    <p>{entry.people}</p>
+                  </div>
+                ) : (
+                  <></>
+                )}
               </div>
               <p className="has-text-right">{entry.createdAt}</p>
             </div>

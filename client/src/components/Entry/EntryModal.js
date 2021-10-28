@@ -70,6 +70,7 @@ function EntryModal({ closeModal, originalThought, setOriginalThought, fixedThou
       setIncident("");
       setLocation("");
       setPeople("");
+      closeModal(false);
     } catch (err) {
       console.error(err);
     }
