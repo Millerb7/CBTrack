@@ -53,13 +53,13 @@ const resolvers = {
 
       return { token, user };
     },
-    addEntry: async (parent, { originalThought, fixedThought,  incident, locations, people }, context) => {
+    addEntry: async (parent, { originalThought, fixedThought,  incident, location, people }, context) => {
       if (context.user) {
         const entry = await Entry.create({
           originalThought,
           fixedThought, 
           incident, 
-          locations, 
+          location, 
           people,
           entryAuthor: context.user._id,
         });

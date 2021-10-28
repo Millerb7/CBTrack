@@ -97,7 +97,7 @@ const Input = () => {
               <button className="button is-fullwidth py-3" type="click" onClick={() => setModal(true)}>
                 modal
               </button>
-              {modal && <EntryModal closeModal={setModal} originalThought={originalThought} setOriginalThought={setOriginalText} setFixedThought={setFixedText} handleFormSubmit={handleFormSubmit} />}
+              {modal && <EntryModal closeModal={setModal} originalThought={originalThought} setOriginalThought={setOriginalText} fixedThought={fixedThought} setFixedThought={setFixedText} />}
             </form>
           </div>
         ) : (
