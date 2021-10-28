@@ -35,11 +35,11 @@ const Log = () => {
             >
               <div className="tile p-3 is-flex is-flex-direction-column">
                 <div className="">
-                  <h3>{entry.originalThought}</h3>
+                  <h3 className="subtitle has-text-centered has-text-weight-medium">{entry.originalThought}</h3>
                 </div>
                 {entry.fixedThought ? (
                   <div className="is-flex is-flex-direction-row">
-                    <h3 className="has-text-centered">Changed Thought: </h3>
+                    <h3 className="has-text-centered">Changed Thought:&nbsp;&nbsp;&nbsp;</h3>
                     <p>{entry.fixedThought}</p>
                   </div>
                 ) : (
@@ -47,7 +47,7 @@ const Log = () => {
                 )}
                 {entry.incident ? (
                   <div className="is-flex is-flex-direction-row">
-                    <h3 className="has-text-centered">What caused thought: </h3>
+                    <h3 className="has-text-centered">What caused thought:&nbsp;&nbsp;&nbsp;</h3>
                     <p>{entry.incident}</p>
                   </div>
                 ) : (
@@ -55,7 +55,7 @@ const Log = () => {
                 )}
                 {entry.location ? (
                   <div className="is-flex is-flex-direction-row">
-                    <h3 className="has-text-centered">Where thought occured: </h3>
+                    <h3 className="has-text-centered">Where thought occured:&nbsp;&nbsp;&nbsp;</h3>
                     <p>{entry.location}</p>
                   </div>
                 ) : (
@@ -63,7 +63,7 @@ const Log = () => {
                 )}
                 {entry.people ? (
                   <div className="is-flex is-flex-direction-row">
-                    <h3 className="has-text-centered">Who was involved: </h3>
+                    <h3 className="has-text-centered">Who was involved:&nbsp;&nbsp;&nbsp;</h3>
                     <p>{entry.people}</p>
                   </div>
                 ) : (

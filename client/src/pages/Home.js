@@ -25,7 +25,7 @@ const Home = () => {
         <h1 className="title is-size-1">Self CBT</h1>
         <h1 className="title is-size-3">Welcome to self help!</h1>
         <h3 className="title is-size-6">Web app is a work in progress still :)</h3>
-        <button id="introBtn" className="title is-size-5 p-1" onClick={() => setModal(true)}>Introduction to CBT</button>
+        <button id="introBtn" className="button is-light is-default p-2" onClick={() => setModal(true)}>Introduction to CBT</button>
         {openModal && <IntroModal closeModal = {setModal} />}
         <div>
           <Articles />
