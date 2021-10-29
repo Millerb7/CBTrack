@@ -4,7 +4,9 @@ import { ADD_ENTRY } from "../../utils/mutations";
 import { QUERY_ENTRIES, QUERY_ME } from "../../utils/queries";
 import Auth from "../../utils/auth";
 
-function EntryModal({ closeModal, originalThought, setOriginalThought, fixedThought, setFixedThought }) {
+function AdvancedEntry() {
+  const [originalThought, setOriginalThought] = useState("");
+  const [fixedThought, setFixedThought] = useState("");
   const [incident, setIncident] = useState("");
   const [location, setLocation] = useState("");
   const [people, setPeople] = useState("");
@@ -70,19 +72,13 @@ function EntryModal({ closeModal, originalThought, setOriginalThought, fixedThou
       setIncident("");
       setLocation("");
       setPeople("");
-      closeModal(false);
     } catch (err) {
       console.error(err);
     }
   };
 
   return (
-    <div className="modal is-active">
-      <div className="modal-background" onClick={() => closeModal(false)}></div>
-      <div className="modal-card">
-        <section className="modal-card-body">
-        <nav className="has-text-right mb-5" onClick={() => closeModal(false)}>X</nav>
-          <div className=" is-flex is-flex-direction-row has-text-centered">
+    <footer className="">
             <form
               onSubmit={handleFormSubmit}
               className="is-flex is-flex-direction-row is-flex-wrap-wrap"
@@ -91,7 +87,7 @@ function EntryModal({ closeModal, originalThought, setOriginalThought, fixedThou
                 name="originalThought"
                 placeholder="New thought..."
                 value={originalThought}
-                className="textarea"
+                className="textarea is-12"
                 style={{ lineHeight: "1.5", resize: "vertical" }}
                 onChange={handleChange}
                 rows={3}
@@ -100,7 +96,7 @@ function EntryModal({ closeModal, originalThought, setOriginalThought, fixedThou
                 name="fixedThought"
                 placeholder="Changed thought..."
                 value={fixedThought}
-                className="textarea"
+                className="textarea column is-one-quarter is-gapless"
                 style={{ lineHeight: "1.5", resize: "vertical" }}
                 onChange={handleChange}
                 rows={3}
@@ -109,7 +105,7 @@ function EntryModal({ closeModal, originalThought, setOriginalThought, fixedThou
                 name="incident"
                 placeholder="What happened when this thought occured?"
                 value={incident}
-                className="textarea"
+                className="textarea column is-half is-gapless"
                 style={{ lineHeight: "1.5", resize: "vertical" }}
                 onChange={handleChange}
                 rows={3}
@@ -138,11 +134,8 @@ function EntryModal({ closeModal, originalThought, setOriginalThought, fixedThou
                 </button>
               </footer>
             </form>
-          </div>
-        </section>
-      </div>
-    </div>
+    </footer>
   );
 }
 
-export default EntryModal;
+export default AdvancedEntry;

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import Input from "../components/Entry/Input";
+import SimpleEntry from "../components/Entry/SimpleEntry";
 import HomeNavbar from "../components/Navbars/HomeNavbar";
 import Day from "../components/Entry/Day";
-
+import AdvancedEntry from "../components/Entry/AdvancedEntry";
+import inputOption from "./Settings";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "bulma/css/bulma.css";
@@ -36,7 +37,7 @@ function Daily() {
           </div>
         </div>
       </div>
-      <Input />
+      {inputOption==="simple" ? (<SimpleEntry />) : (<AdvancedEntry />)}
     </div>
   );
 }

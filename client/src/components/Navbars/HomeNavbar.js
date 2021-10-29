@@ -30,7 +30,7 @@ function HomeNavbar() {
           </Link>
         </div>
       ) : (
-        <div className="is-flex is-justify-content-space-around p-2 m-2">
+        <div className="is-flex is-justify-content-space-around p-2 m`-2">
           <Link className="navbar-item" to="/">
             Home
           </Link>

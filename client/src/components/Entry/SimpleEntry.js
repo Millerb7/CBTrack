@@ -3,13 +3,11 @@ import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_ENTRY } from "../../utils/mutations";
 import { QUERY_ENTRIES, QUERY_ME } from "../../utils/queries";
-import EntryModal from "./EntryModal";
 import Auth from "../../utils/auth";
 
-const Input = () => {
+const SimpleEntry = () => {
   const [originalThought, setOriginalText] = useState("");
   const [fixedThought, setFixedText] = useState("");
-  const [modal, setModal] = useState(false);
 
   const [addEntry, { error }] = useMutation(ADD_ENTRY, {
     update(cache, { data: { addEntry } }) {
@@ -94,10 +92,6 @@ const Input = () => {
               <button className="button is-fullwidth py-3" type="submit">
                 Add Thought
               </button>
-              <button className="button is-fullwidth py-3" type="click" onClick={() => setModal(true)}>
-                modal
-              </button>
-              {modal && <EntryModal closeModal={setModal} originalThought={originalThought} setOriginalThought={setOriginalText} fixedThought={fixedThought} setFixedThought={setFixedText} />}
             </form>
           </div>
         ) : (
@@ -111,4 +105,4 @@ const Input = () => {
   );
 };
 
-export default Input;
+export default SimpleEntry;
