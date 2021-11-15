@@ -4,7 +4,7 @@ import HomeNavbar from "../components/Navbars/HomeNavbar";
 import Articles from "../components/Home/Articles";
 import IntroModal from "../components/Home/IntroModal";
 import AdvancedEntry from "../components/Entry/AdvancedEntry";
-import inputOption from "./Settings";
+import inputType from "./Settings";
 
 import "bulma/css/bulma.css";
 import "../index.css";
@@ -17,7 +17,8 @@ const styles = {
 
 const Home = () => {
   const [openModal, setModal] = useState(false);
-  const [inputOption, setInputOption] = useState("simple");
+
+  console.log(inputType);
 
   return (
     <div style={styles.body}>
@@ -27,7 +28,7 @@ const Home = () => {
           <h1 className="title is-size-1">Self CBT</h1>
           <h1 className="title is-size-3">Welcome to self help!</h1>
           <h3 className="title is-size-6">
-            Web app is a work in progress still :)
+            Web app is a work in progress still. Taking a hiatus for a funeral and life events.
           </h3>
           <button
             id="introBtn"
@@ -39,30 +40,10 @@ const Home = () => {
           {openModal && <IntroModal closeModal={setModal} />}
           <div>
             <Articles />
-
-            <div class="control">
-              <h1>Thought Input</h1>
-              <label class="radio">
-
-                  <input type="radio" name="simple" checked onClick={setInputOption.bind("simple")} />
-                
-                Simple
-              </label>
-              <label class="radio">
-                
-                  <input
-                    type="radio"
-                    name="advanced"
-                    onClick={setInputOption.bind("advanced")}
-                  />
-            
-                Advanced
-              </label>
-            </div>
           </div>
         </div>
       </div>
-      {inputOption === "simple" ? <SimpleEntry /> : <AdvancedEntry />}
+      {inputType==="simple" ? <SimpleEntry /> : <AdvancedEntry />}
     </div>
   );
 };

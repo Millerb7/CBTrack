@@ -2,20 +2,27 @@ import React, { useState } from "react";
 import BackNavbar from "../components/Navbars/BackNavbar";
 import "bulma/css/bulma.css";
 
+let inputType = "simple";
+
 function Settings() {
-    const [inputOption, setInputOption] = useState("xxxtentacion");
+  console.log('type '+inputType);
+    const changeInput = (inputOption) => {
+      console.log('option '+inputOption);
+      inputType = inputOption;
+    }
+
   return (
     <div>
       <BackNavbar />
       <div className="title has-text-centered p-4 m-2">Settings</div>
-      <div class="control">
+      <div className="control">
         <h1>Thought Input</h1>
-        <label class="radio">
-          {inputOption==="simple" ? (<input type="radio" name="simple" checked/>) : (<input type="radio" name="simple" onClick={setInputOption} />) }
+        <label className="radio">
+          {inputType==="simple" ? (<input type="radio" name="input" value="simple" checked onChange={() => changeInput("simple")}/>):(<input type="radio" name="input" value="simple" onChange={() => changeInput("simple")}/>)}
           Simple
         </label>
-        <label class="radio">
-        {inputOption==="advanced" ? (<input type="radio" name="advanced" checked/>) : (<input type="radio" name="advanced" onClick={setInputOption} />) }
+        <label className="radio">
+        {inputType==="advanced" ? (<input type="radio" name="input" value="advanced" checked onChange={() => changeInput("advanced")} />):(<input type="radio" name="input" value="advanced" onChange={() => changeInput("advanced")} />)}
           Advanced
         </label>
       </div>
@@ -23,4 +30,4 @@ function Settings() {
   );
 }
 
-export default Settings;
+export { Settings as default, inputType };
